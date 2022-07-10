@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -74,6 +75,7 @@ public class AnalogController extends View {
         super.onDraw(canvas);
         midx = canvas.getWidth() / 2;
         midy = canvas.getHeight() / 2;
+        Log.d("Analog()::", "OnDraw() -> " + String.valueOf(midx) + ", " + String.valueOf(midy));
 
         int   ang    = 0;
         float x      = 0, y = 0;

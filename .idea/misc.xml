@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/androidWork/equalizerExample/app/src/main/res/drawable/custom_equalizer_thumb.xml" value="0.20677083333333332" />
         <entry key="..\:/androidWork/equalizerExample/app/src/main/res/layout/activity_main.xml" value="0.34791666666666665" />
         <entry key="..\:/androidWork/equalizerExample/app/src/main/res/layout/dialog_fragment_equalizer.xml" value="0.34791666666666665" />
-        <entry key="..\:/androidWork/equalizerExample/app/src/main/res/layout/fragment_equalizer.xml" value="0.19010416666666666" />
+        <entry key="..\:/androidWork/equalizerExample/app/src/main/res/layout/fragment_equalizer.xml" value="0.25" />
+        <entry key="..\:/androidWork/equalizerExample/app/src/main/res/layout/spinner_item.xml" value="0.19010416666666666" />
         <entry key="..\:/androidWork/equalizerExample/app/src/main/res/menu/main_menu.xml" value="0.34791666666666665" />
       </map>
     </option>

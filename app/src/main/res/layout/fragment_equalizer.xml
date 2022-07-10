@@ -46,20 +46,21 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_marginTop="30dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/equalizer_action_container"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="30dp">
+        android:orientation="vertical">
 
         <com.db.chart.view.LineChartView
             android:id="@+id/lineChart"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
             android:layout_weight="3"
-            android:background="@drawable/graph_back_2" />
+            android:background="@drawable/graph_back_2"
+            android:paddingBottom="5dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -103,7 +104,7 @@
         <LinearLayout
             android:id="@+id/equalizerContainer"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="0dp"
             android:layout_weight="6"
             android:orientation="horizontal"
             android:padding="3dp">
@@ -289,7 +290,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/equalizerBlocker"

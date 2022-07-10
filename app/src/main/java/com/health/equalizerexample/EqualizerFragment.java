@@ -11,6 +11,7 @@ import android.media.audiofx.BassBoost;
 import android.media.audiofx.Equalizer;
 import android.media.audiofx.PresetReverb;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -130,6 +131,11 @@ public class EqualizerFragment extends Fragment {
         } else {
             mEqualizer.usePreset((short) Settings.presetPos);
         }
+
+        // 첫 실행 시 마지막 값 가지고 오기.
+        for(int i : Settings.seekbarpos) {
+            Log.d("Equalizer()", "i -> " + i);
+        }
     }
 
     @Override
@@ -138,6 +144,7 @@ public class EqualizerFragment extends Fragment {
         ctx = context;
     }
 
+    // View 가지고 오기
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -148,7 +155,7 @@ public class EqualizerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        // Back 버튼 리스너
         backBtn = view.findViewById(R.id.equalizer_back_btn);
         backBtn.setVisibility(showBackButton ? View.VISIBLE : View.GONE);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -159,10 +166,10 @@ public class EqualizerFragment extends Fragment {
                 }
             }
         });
-
+        // Title 
         fragTitle = view.findViewById(R.id.equalizer_fragment_title);
-
-
+        
+        // stitch 리스너
         equalizerSwitch = view.findViewById(R.id.equalizer_switch);
         equalizerSwitch.setChecked(Settings.isEqualizerEnabled);
         equalizerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -188,11 +195,11 @@ public class EqualizerFragment extends Fragment {
 
         equalizerBlocker = view.findViewById(R.id.equalizerBlocker);
 
-
         chart   = view.findViewById(R.id.lineChart);
         paint   = new Paint();
         dataset = new LineSet();
 
+        // Bass, 3D
         bassController   = view.findViewById(R.id.controllerBass);
         reverbController = view.findViewById(R.id.controller3D);
 
@@ -374,7 +381,8 @@ public class EqualizerFragment extends Fragment {
                 Settings.seekbarpos[i]       = mEqualizer.getBandLevel(equalizerBandIndex);
                 Settings.isEqualizerReloaded = true;
             }
-
+            
+            // SeekBar 움직일 때 마다 호출
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -382,6 +390,7 @@ public class EqualizerFragment extends Fragment {
                     points[seekBar.getId()]                                  = mEqualizer.getBandLevel(equalizerBandIndex) - lowerEqualizerBandLevel;
                     Settings.seekbarpos[seekBar.getId()]                     = (progress + lowerEqualizerBandLevel);
                     Settings.equalizerModel.getSeekbarpos()[seekBar.getId()] = (progress + lowerEqualizerBandLevel);
+                    Log.d("seekBar()", "progress: " + String.valueOf(progress) + ",lowerLever: " +  String.valueOf( (progress + lowerEqualizerBandLevel)) + ",Point: " + String.valueOf(mEqualizer.getBandLevel(equalizerBandIndex) - lowerEqualizerBandLevel));
                     dataset.updateValues(points);
                     chart.notifyDataUpdate();
                 }
@@ -401,7 +410,8 @@ public class EqualizerFragment extends Fragment {
         }
 
         equalizeSound();
-
+        
+        // 그래프 line 조정
         paint.setColor(Color.parseColor("#555555"));
         paint.setStrokeWidth((float) (1.10 * Settings.ratio));
 
@@ -426,10 +436,9 @@ public class EqualizerFragment extends Fragment {
         Button mEndButton = new Button(getContext());
         mEndButton.setBackgroundColor(themeColor);
         mEndButton.setTextColor(Color.WHITE);
-
-
     }
 
+    // 소리
     public void equalizeSound() {
         ArrayList<String> equalizerPresetNames = new ArrayList<>();
         ArrayAdapter<String> equalizerPresetSpinnerAdapter = new ArrayAdapter<>(ctx,

@@ -36,26 +36,27 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void showInDialog() {
-        int sessionId = mediaPlayer.getAudioSessionId();
-        if (sessionId > 0) {
-            DialogEqualizerFragment fragment = DialogEqualizerFragment.newBuilder()
-                    .setAudioSessionId(sessionId)
-                    .title(R.string.app_name)
-                    .themeColor(ContextCompat.getColor(this, R.color.primaryColor))
-                    .textColor(ContextCompat.getColor(this, R.color.textColor))
-                    .accentAlpha(ContextCompat.getColor(this, R.color.playingCardColor))
-                    .darkColor(ContextCompat.getColor(this, R.color.primaryDarkColor))
-                    .setAccentColor(ContextCompat.getColor(this, R.color.secondaryColor))
-                    .build();
-            fragment.show(getSupportFragmentManager(), "eq");
-        }
-    }
+//    private void showInDialog() {
+//        int sessionId = mediaPlayer.getAudioSessionId();
+//        if (sessionId > 0) {
+//            DialogEqualizerFragment fragment = DialogEqualizerFragment.newBuilder()
+//                    .setAudioSessionId(sessionId)
+//                    .title(R.string.app_name)
+//                    .themeColor(ContextCompat.getColor(this, R.color.primaryColor))
+//                    .textColor(ContextCompat.getColor(this, R.color.textColor))
+//                    .accentAlpha(ContextCompat.getColor(this, R.color.playingCardColor))
+//                    .darkColor(ContextCompat.getColor(this, R.color.primaryDarkColor))
+//                    .setAccentColor(ContextCompat.getColor(this, R.color.secondaryColor))
+//                    .build();
+//            fragment.show(getSupportFragmentManager(), "eq");
+//        }
+//    }
 
     @Override
     protected void onStop() {
         super.onStop();
 
+        // 끌 때 저장하기.
         saveEqualizerSettings();
     }
 
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.itemEqDialog) {
-            showInDialog();
+            //showInDialog();
             return true;
         }
         return super.onOptionsItemSelected(item);
